@@ -1,0 +1,24 @@
+{
+  "name": "bypasscors",
+  "version": "1.5.0",
+  "description": "Bypass CORS restrictions to get data from external domains using the NodeJs server.  Setup a get route on your server that you can call from the client and pass it the URL you want to retrive:\",",
+  "main": "index.js",
+  "scripts": {
+    "test": "node example.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gulakov/bypasscors.git"
+  },
+  "keywords": [
+    "bypass",
+    "cors",
+    "scrape",
+    "dom",
+    "proxy",
+    "iframe"
+  ],
+  "author": "Alex Gulakov <alexgulakov@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/gulakov/bypasscors#readme"
+}
