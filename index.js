@@ -1,18 +1,31 @@
 module.exports = function(url, callback){
 
-	var domain = (url.match(/(http:\/\/|https:\/\/)[^\/]+/gi) || [""])[0];
+	var ua = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.19 Safari/537.36';
 
-	require('request')({
-	  url: url,
-	  headers: {
-	    'REFERER': domain,
-		'user-agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.19 Safari/537.36'
-	  }
-	}, function (error, response, html) {
+	var corsURL =  require('url').parse(url);
+	
+	require(corsURL.protocol.slice(0,-1)).request({
+	    host: corsURL.host,
+	    path: corsURL.path,
+		method: 'GET',
+	    headers: {
+		    'REFERER': corsURL.host,
+			'user-agent': ua
+		  }
+	}, function(response) {
+		var html = '';
+	    
+	    response.on('data', function(chunk) {
+	          html += chunk;
+	    });
+	    response.on('end', function() {
+	    	//spoof the base-url for relative paths on the target page
+			html = (html||"").replace(/<head[^>]*>/i, "<head><base href='" + corsURL.protocol + "//" + corsURL.host + "/'>")
+			  	
+		    callback(html);
+	    });
+	}).on('error', function(e) {
+	  console.log(e.message);
+	}).end();
 
-		//spoof the base-url for relative paths on the target page
-		html = (html||"").replace("<head>", "<head><base href='" + domain+ "/'>")
-
-	  	callback(html);
-	});
 }
