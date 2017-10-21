@@ -34,7 +34,7 @@ node node_modules/bypasscors/example
 
 ### Virtual DOM and JS
 
-This approach only returns the html and text returned at that URL, not the HTML DOM and text inserted after page load by AJAX requests or by single-page interface frameworks like React.js. To overcome this you can create a virtual DOM and JS execution environment by creating an invisible iframe then loading into its source the URL to your local-host-proxied scraper end point, then you can access the iframe DOMs contents (chrome treats both the iframe and your domain as  same origin). If you need a DOM/JS execution environment on the server-side you can use [WebDriver.io](http://webdriver.io/) 
+This approach only returns the html and text returned at that URL, not the HTML DOM and text inserted after page load by AJAX requests or by single-page interface frameworks like React.js. To overcome this you can create a virtual DOM and JS execution environment by creating an invisible iframe then loading into its source the URL to your local-host-proxied scraper end point, then you can access the iframe DOMs contents (chrome treats both the iframe and your domain as  same origin). If you need a JS DOM execution environment on the server-side you can use [Ghost Driver](https://github.com/detro/ghostdriver/) which implements Selenium WebDriver methods executed in the environment of the PhantomJS Webkit engine.
 
 
 ```
